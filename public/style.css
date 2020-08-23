@@ -9,8 +9,6 @@ html {
 body {
   background: #eee;
   padding: 0 16px;
-  max-width: 100%;
-  overflow-x: hidden;
   background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 
@@ -33,6 +31,8 @@ footer {
   bottom: 0;
   width: 100%;
   height: 2.5rem;
+  right: 0;
+  left: 0;
 }
 
 footer p {
@@ -103,4 +103,21 @@ form.create-note button {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   outline: none;
+}
+
+.loader {
+  background-color: #000;
+  opacity: 0.25;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader img {
+  background-color: transparent
 }

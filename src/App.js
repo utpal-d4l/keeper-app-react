@@ -5,6 +5,7 @@ import CreateNote from './components/CreateNote'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Note from './components/Note'
+import withLoader from './hoc/withLoader'
 
 function App() {
   const [notes, setNotes] = useState([])
@@ -27,10 +28,10 @@ function App() {
     <>
       <Header />
       <CreateNote addNote={addNote} createNote={createNote} note={note} />
-      {notes.map(item => <Note key={item.id} deleteNote={deleteNote} {...item}  />)}
+      {notes.map(item => <Note key={item.id} deleteNote={deleteNote} {...item} />)}
       <Footer />
     </>
   )
 }
 
-export default App
+export default withLoader()(App)
