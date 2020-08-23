@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/keeper-app-react/static/js/main.a671cb25.chunk.js",
-    "main.js.map": "/keeper-app-react/static/js/main.a671cb25.chunk.js.map",
+    "main.js": "/keeper-app-react/static/js/main.11475e0d.chunk.js",
+    "main.js.map": "/keeper-app-react/static/js/main.11475e0d.chunk.js.map",
     "runtime-main.js": "/keeper-app-react/static/js/runtime-main.1bdaf283.js",
     "runtime-main.js.map": "/keeper-app-react/static/js/runtime-main.1bdaf283.js.map",
-    "static/js/2.275ec37d.chunk.js": "/keeper-app-react/static/js/2.275ec37d.chunk.js",
-    "static/js/2.275ec37d.chunk.js.map": "/keeper-app-react/static/js/2.275ec37d.chunk.js.map",
+    "static/js/2.33f72793.chunk.js": "/keeper-app-react/static/js/2.33f72793.chunk.js",
+    "static/js/2.33f72793.chunk.js.map": "/keeper-app-react/static/js/2.33f72793.chunk.js.map",
     "index.html": "/keeper-app-react/index.html",
-    "precache-manifest.7d143017ada7cf956aa22fa3399d0e1d.js": "/keeper-app-react/precache-manifest.7d143017ada7cf956aa22fa3399d0e1d.js",
+    "precache-manifest.c5507268683a3b7a227c7c5f8f4a9672.js": "/keeper-app-react/precache-manifest.c5507268683a3b7a227c7c5f8f4a9672.js",
     "service-worker.js": "/keeper-app-react/service-worker.js",
-    "static/js/2.275ec37d.chunk.js.LICENSE.txt": "/keeper-app-react/static/js/2.275ec37d.chunk.js.LICENSE.txt"
+    "static/js/2.33f72793.chunk.js.LICENSE.txt": "/keeper-app-react/static/js/2.33f72793.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1bdaf283.js",
-    "static/js/2.275ec37d.chunk.js",
-    "static/js/main.a671cb25.chunk.js"
+    "static/js/2.33f72793.chunk.js",
+    "static/js/main.11475e0d.chunk.js"
   ]
 }
