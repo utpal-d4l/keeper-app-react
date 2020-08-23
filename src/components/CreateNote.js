@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
-function CreateNote({addNote, createNote, note}) {
+import AddIcon from '@material-ui/icons/Add'
+import { Fab, Zoom } from '@material-ui/core';
+
+function CreateNote({ addNote, createNote, note }) {
+  const [isFocused, setIsFocused] = useState(false)
+
   const handleAddNote = (event) => {
-    const {name, value} = event.target
+    const { name, value } = event.target
 
     if (name === 'title') {
-      addNote({...note, title: value})
+      addNote({ ...note, title: value })
     } else {
-      addNote({...note, text: value})
+      addNote({ ...note, text: value })
     }
   }
 
@@ -18,10 +23,30 @@ function CreateNote({addNote, createNote, note}) {
 
   return (
     <div>
-      <form>
-        <input name="title" placeholder="Title" value={note.title} onChange={handleAddNote} />
-        <textarea name="content" placeholder="Take a note..." rows="3" value={note.text} onChange={handleAddNote} />
-        <button onClick={handleCreateNote}>Add</button>
+      <form className="create-note">
+        {isFocused && (
+          <input
+            className="input"
+            name="title"
+            onChange={handleAddNote}
+            placeholder="Title"
+            value={note.title}
+          />
+        )}
+        <textarea
+          className="textarea"
+          name="content"
+          onChange={handleAddNote}
+          onFocus={() => setIsFocused(true)}
+          placeholder="Take a note..."
+          rows={isFocused ? '3' : '1'}
+          value={note.text}
+        />
+        <Zoom in={isFocused}>
+          <Fab onClick={handleCreateNote}>
+            <AddIcon />
+          </Fab>
+        </Zoom>
       </form>
     </div>
   );
