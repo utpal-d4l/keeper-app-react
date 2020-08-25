@@ -6,10 +6,12 @@ const withLoader = () => (WrappedComponent) => {
   function WithLoader(props) {
     const [loading, setLoading] = useState(false)
 
-    const apiCall = async () => {
+    const apiCall = async (req) => {
       setLoading(true)
+      const res = await req()
 
-      setTimeout(() => setLoading(false), 2000)
+      setLoading(false)
+      return res
     }
 
     return (

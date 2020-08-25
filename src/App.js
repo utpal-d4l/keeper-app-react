@@ -1,34 +1,49 @@
-import React, { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import React, { useEffect, useState } from 'react'
 
 import CreateNote from './components/CreateNote'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import Note from './components/Note'
 import withLoader from './hoc/withLoader'
+import DisplayNote from './components/DisplayNote'
+import Http from './utils/httpUtils'
 
-function App() {
+import { CREATE_NOTE, DELETE_NOTE, GET_NOTES } from './api/endpoints'
+
+function App({ apiCall }) {
   const [notes, setNotes] = useState([])
   const [note, setNote] = useState({ title: '', text: '' })
 
-  const addNote = (note) => setNote(note)
+  const getNotes = async () => {
+    const request = Http.request(Http.GET, GET_NOTES)
+    const res = await apiCall(request)
+
+    if (res) {
+      setNotes(res)
+    }
+  }
+
+  useEffect(() => {
+    getNotes()
+  }, [])
+
+  const addNote = noteItem => setNote(noteItem)
 
   const createNote = () => {
-    const id = uuidv4()
-
-    setNotes([...notes, { ...note, id }])
+    const request = Http.request(Http.POST, CREATE_NOTE, note, getNotes)
+    apiCall(request)
     setNote({ title: '', text: '' })
   }
 
   const deleteNote = (id) => {
-    setNotes(prevNotes => prevNotes.filter(item => item.id !== id))
+    const request = Http.request(Http.POST, DELETE_NOTE, { id }, getNotes)
+    apiCall(request)
   }
 
   return (
     <>
       <Header />
       <CreateNote addNote={addNote} createNote={createNote} note={note} />
-      {notes.map(item => <Note key={item.id} deleteNote={deleteNote} {...item} />)}
+      <DisplayNote deleteNote={deleteNote} notes={notes} />
       <Footer />
     </>
   )

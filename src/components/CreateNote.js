@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 import AddIcon from '@material-ui/icons/Add'
-import { Fab, Zoom } from '@material-ui/core';
+import { Fab, Zoom } from '@material-ui/core'
 
 function CreateNote({ addNote, createNote, note }) {
   const [isFocused, setIsFocused] = useState(false)
@@ -43,13 +43,13 @@ function CreateNote({ addNote, createNote, note }) {
           value={note.text}
         />
         <Zoom in={isFocused}>
-          <Fab onClick={handleCreateNote}>
+          <Fab disabled={!note.text} onClick={handleCreateNote}>
             <AddIcon />
           </Fab>
         </Zoom>
       </form>
     </div>
-  );
+  )
 }
 
 export default CreateNote
