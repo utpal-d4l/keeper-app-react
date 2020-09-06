@@ -1,36 +1,26 @@
-import React, { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import React, { useEffect, useState } from 'react'
 
-import CreateNote from './components/CreateNote'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import Note from './components/Note'
+import Home from './components/Home'
+import Login from './components/Login'
+import withApiCall from './hoc/withApiCall'
+import { CheckToken, Logout } from './api/routes'
 
-function App() {
-  const [notes, setNotes] = useState([])
-  const [note, setNote] = useState({ title: '', text: '' })
+function App({ apiCall }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
 
-  const addNote = (note) => setNote(note)
+  useEffect(() => {
+    apiCall(CheckToken, () => setIsLoggedIn(true), () => setIsLoggedIn(false))
+  }, [])
 
-  const createNote = () => {
-    const id = uuidv4()
+  const logout = () => apiCall(Logout, () => setIsLoggedIn(false))
 
-    setNotes([...notes, { ...note, id }])
-    setNote({ title: '', text: '' })
+  if (isLoggedIn === null) {
+    return null
   }
 
-  const deleteNote = (id) => {
-    setNotes(prevNotes => prevNotes.filter(item => item.id !== id))
-  }
-
-  return (
-    <>
-      <Header />
-      <CreateNote addNote={addNote} createNote={createNote} note={note} />
-      {notes.map(item => <Note key={item.id} deleteNote={deleteNote} {...item}  />)}
-      <Footer />
-    </>
-  )
+  return isLoggedIn
+    ? <Home logout={logout} />
+    : <Login setLogin={setIsLoggedIn} />
 }
 
-export default App
+export default withApiCall()(App)

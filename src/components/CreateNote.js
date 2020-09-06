@@ -1,23 +1,24 @@
-import React, { useState } from "react";
-
+import React, { useState } from 'react'
 import AddIcon from '@material-ui/icons/Add'
-import { Fab, Zoom } from '@material-ui/core';
+import { Fab, Zoom } from '@material-ui/core'
 
-function CreateNote({ addNote, createNote, note }) {
+function CreateNote({ createNote }) {
   const [isFocused, setIsFocused] = useState(false)
+  const [note, setNote] = useState({ title: '', text: '' })
 
   const handleAddNote = (event) => {
     const { name, value } = event.target
 
     if (name === 'title') {
-      addNote({ ...note, title: value })
+      setNote({ ...note, title: value })
     } else {
-      addNote({ ...note, text: value })
+      setNote({ ...note, text: value })
     }
   }
 
   const handleCreateNote = (event) => {
-    createNote()
+    createNote(note)
+    setNote({ title: '', text: '' })
     event.preventDefault()
   }
 
@@ -43,13 +44,13 @@ function CreateNote({ addNote, createNote, note }) {
           value={note.text}
         />
         <Zoom in={isFocused}>
-          <Fab onClick={handleCreateNote}>
+          <Fab disabled={!note.text} onClick={handleCreateNote}>
             <AddIcon />
           </Fab>
         </Zoom>
       </form>
     </div>
-  );
+  )
 }
 
 export default CreateNote
