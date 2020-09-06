@@ -2,10 +2,10 @@ import React from 'react'
 
 import Note from './Note'
 
-function DisplayNote({ deleteNote, notes }) {
+function DisplayNote({ notes, ...other }) {
   return (
     <div className="notes-container">
-      {notes.map((item) => <Note key={item._id} deleteNote={deleteNote} {...item} />)}
+      {notes.map((item) => <Note key={item._id} {...item} {...other} />)}
     </div>
   )
 }

@@ -1,52 +1,26 @@
 import React, { useEffect, useState } from 'react'
 
-import CreateNote from './components/CreateNote'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import withLoader from './hoc/withLoader'
-import DisplayNote from './components/DisplayNote'
-import Http from './utils/httpUtils'
-
-import { CREATE_NOTE, DELETE_NOTE, GET_NOTES } from './api/endpoints'
+import Home from './components/Home'
+import Login from './components/Login'
+import withApiCall from './hoc/withApiCall'
+import { CheckToken, Logout } from './api/routes'
 
 function App({ apiCall }) {
-  const [notes, setNotes] = useState([])
-  const [note, setNote] = useState({ title: '', text: '' })
-
-  const getNotes = async () => {
-    const request = Http.request(Http.GET, GET_NOTES)
-    const res = await apiCall(request)
-
-    if (res) {
-      setNotes(res)
-    }
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
 
   useEffect(() => {
-    getNotes()
+    apiCall(CheckToken, () => setIsLoggedIn(true), () => setIsLoggedIn(false))
   }, [])
 
-  const addNote = noteItem => setNote(noteItem)
+  const logout = () => apiCall(Logout, () => setIsLoggedIn(false))
 
-  const createNote = () => {
-    const request = Http.request(Http.POST, CREATE_NOTE, note, getNotes)
-    apiCall(request)
-    setNote({ title: '', text: '' })
+  if (isLoggedIn === null) {
+    return null
   }
 
-  const deleteNote = (id) => {
-    const request = Http.request(Http.POST, DELETE_NOTE, { id }, getNotes)
-    apiCall(request)
-  }
-
-  return (
-    <>
-      <Header />
-      <CreateNote addNote={addNote} createNote={createNote} note={note} />
-      <DisplayNote deleteNote={deleteNote} notes={notes} />
-      <Footer />
-    </>
-  )
+  return isLoggedIn
+    ? <Home logout={logout} />
+    : <Login setLogin={setIsLoggedIn} />
 }
 
-export default withLoader()(App)
+export default withApiCall()(App)

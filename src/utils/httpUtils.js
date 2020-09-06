@@ -11,52 +11,22 @@ class HttpUtils {
     return `${BASE_URL}${url}`
   }
 
-  static get(url, params, successCallback, failureCallback) {
+  static get(url) {
     return new Promise((resolve) => {
       const finalUrl = HttpUtils.finalUrl(url)
-      axios.get(finalUrl, params)
-        .then((res) => {
-          if (successCallback) {
-            successCallback()
-          }
-          resolve(res.data)
-        })
-        .catch((err) => {
-          if (failureCallback) {
-            failureCallback()
-          }
-          resolve(err)
-        })
+      axios.get(finalUrl, { withCredentials: true })
+        .then(res => resolve(res.data))
+        .catch(err => resolve(err.response))
     })
   }
 
-  static post(url, params, successCallback, failureCallback) {
+  static post(url, params) {
     return new Promise((resolve) => {
       const finalUrl = HttpUtils.finalUrl(url)
-      axios.post(finalUrl, params)
-        .then((res) => {
-          if (successCallback) {
-            successCallback()
-          }
-          resolve(res.data)
-        })
-        .catch((err) => {
-          if (failureCallback) {
-            failureCallback()
-          }
-          resolve(err)
-        })
+      axios.post(finalUrl, params, { withCredentials: true })
+        .then(res => resolve(res.data))
+        .catch(err => resolve(err.response))
     })
-  }
-
-  static request(method, url, params, successCallback, failureCallback) {
-    switch (method) {
-      case HttpUtils.GET:
-      default:
-        return () => HttpUtils.get(url, params, successCallback, failureCallback)
-      case HttpUtils.POST:
-        return () => HttpUtils.post(url, params, successCallback, failureCallback)
-    }
   }
 }
 

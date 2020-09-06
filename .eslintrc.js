@@ -25,6 +25,7 @@ module.exports = {
         'memberSyntaxSortOrder': ['none', 'all', 'single', 'multiple']
       }],
       'react/jsx-props-no-spreading': ['off'],
-      'arrow-parens': ['off']
+      'arrow-parens': ['off'],
+      'react/jsx-curly-newline': ['off']
     }
   }
