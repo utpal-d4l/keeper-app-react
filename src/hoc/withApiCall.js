@@ -13,6 +13,13 @@ const withApiCall = () => (WrappedComponent) => {
       const res = await req()
       setLoading(false)
 
+      if (!res) {
+        setError('Server Error!')
+        setTimeout(() => setError(null), 3000)
+        failureCallback()
+        return null
+      }
+
       const errorStatus = String(res?.status || '')
       if (errorStatus.startsWith('4') || errorStatus.startsWith('5')) {
         setError(res.data)

@@ -1,4 +1,4 @@
-import Http from '../utils/HttpUtils'
+import Http from '../utils/httpUtils'
 import {
   CHECK_TOKEN,
   CREATE_NOTE,

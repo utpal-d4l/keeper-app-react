@@ -1,14 +1,12 @@
 import axios from 'axios'
 
-import { BASE_URL } from '../constants/global'
-
 class HttpUtils {
   static GET = 'get'
 
   static POST = 'post'
 
   static finalUrl(url) {
-    return `${BASE_URL}${url}`
+    return `${process.env.API_URL}${url}`
   }
 
   static get(url) {
