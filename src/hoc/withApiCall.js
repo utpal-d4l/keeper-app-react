@@ -8,11 +8,17 @@ const withApiCall = () => (WrappedComponent) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
-    const apiCall = async (req, successCallback = () => null, failureCallback = () => null) => {
+    const apiCall = async (
+      req,
+      successCallback = () => null,
+      failureCallback = () => null,
+      showError = true
+    ) => {
       setLoading(true)
       const res = await req()
       setLoading(false)
 
+      // if there is no response
       if (!res) {
         setError('Server Error!')
         setTimeout(() => setError(null), 3000)
@@ -20,14 +26,18 @@ const withApiCall = () => (WrappedComponent) => {
         return null
       }
 
+      // if failure response
       const errorStatus = String(res?.status || '')
       if (errorStatus.startsWith('4') || errorStatus.startsWith('5')) {
-        setError(res.data)
-        setTimeout(() => setError(null), 3000)
+        if (showError) {
+          setError(res.data)
+          setTimeout(() => setError(null), 3000)
+        }
         failureCallback()
         return null
       }
 
+      // if success response
       successCallback()
       return res
     }

@@ -9,7 +9,7 @@ function App({ apiCall }) {
   const [isLoggedIn, setIsLoggedIn] = useState(null)
 
   useEffect(() => {
-    apiCall(CheckToken, () => setIsLoggedIn(true), () => setIsLoggedIn(false))
+    apiCall(CheckToken, () => setIsLoggedIn(true), () => setIsLoggedIn(false), false)
   }, [])
 
   const logout = () => apiCall(Logout, () => setIsLoggedIn(false))
