@@ -5,7 +5,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import App from './App'
 
-import './styles.css'
+import './styles.dark.css'
 
 const theme = createMuiTheme({
   palette: {
@@ -14,7 +14,8 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#e84a5f'
-    }
+    },
+    type: 'dark'
   },
   typography: {
     fontFamily: 'Montserrat, sans-serif',

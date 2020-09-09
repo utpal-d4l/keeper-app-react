@@ -44,7 +44,7 @@ function LoginPage({ apiCall, setLogin }) {
     <>
       <Header />
       <div className="login">
-        <h1>{isSignup ? 'Signup' : 'Login'}</h1>
+        <h1 className="dark-mode">{isSignup ? 'Signup' : 'Login'}</h1>
         <TextField
           onFocus={() => {
             setIsUserFocused(true)
@@ -96,7 +96,7 @@ function LoginPage({ apiCall, setLogin }) {
           {isSignup ? 'SIGNUP' : 'LOGIN'}
         </Button>
         <button
-          className="secondary-button button-common"
+          className="secondary-button button-common dark-mode"
           type="button"
           onClick={() => setIsSignup(!isSignup)}
         >
