@@ -1,4 +1,5 @@
 module.exports = {
+  CHECK_EXISTING_USER: 'checkExistingUser',
   CHECK_TOKEN: 'checkToken',
   CREATE_NOTE: 'createNote',
   DELETE_NOTE: 'deleteNote',

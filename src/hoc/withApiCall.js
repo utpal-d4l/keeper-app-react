@@ -12,11 +12,12 @@ const withApiCall = () => (WrappedComponent) => {
       req,
       successCallback = () => null,
       failureCallback = () => null,
-      showError = true
+      showError = true,
+      showLoader = true
     ) => {
-      setLoading(true)
+      showLoader && setLoading(true)
       const res = await req()
-      setLoading(false)
+      showLoader && setLoading(false)
 
       // if there is no response
       if (!res) {

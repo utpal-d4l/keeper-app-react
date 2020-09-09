@@ -1,5 +1,6 @@
 import Http from '../utils/httpUtils'
 import {
+  CHECK_EXISTING_USER,
   CHECK_TOKEN,
   CREATE_NOTE,
   DELETE_NOTE,
@@ -8,6 +9,10 @@ import {
   REGISTER,
   UPDATE_NOTE
 } from './endpoints'
+
+export function CheckExistingUser(params) {
+  return Http.post(CHECK_EXISTING_USER, params)
+}
 
 export function CheckToken() {
   return Http.get(CHECK_TOKEN)

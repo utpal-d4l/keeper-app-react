@@ -7,12 +7,14 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import Footer from './Footer'
 import Header from './Header'
 import withApiCall from '../hoc/withApiCall'
-import { Login, Register } from '../api/routes'
+import { CheckExistingUser, Login, Register } from '../api/routes'
 
 function LoginPage({ apiCall, setLogin }) {
   const [user, setUser] = useState({ username: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
   const [isSignup, setIsSignup] = useState(false)
+  const [isExistingUser, setIsExistingUser] = useState(null)
+  const [isUserFocused, setIsUserFocused] = useState(false)
 
   const handleUserInfo = (event) => {
     const { name, value } = event.target
@@ -29,20 +31,41 @@ function LoginPage({ apiCall, setLogin }) {
     apiCall(() => request(user), () => setLogin(true))
   }
 
+  const checkExistingUser = async () => {
+    setIsUserFocused(false)
+    const res = await apiCall(() => CheckExistingUser({ username: user.username }), undefined, undefined, false, false)
+    setIsExistingUser(res === 'Exist')
+  }
+
+  const helperTextLoginVisibility = !!user.username && !isUserFocused && !isSignup && (typeof isExistingUser === 'boolean' && !isExistingUser)
+  const helperTextSignupVisibility = !!user.username && !isUserFocused && isSignup && (typeof isExistingUser === 'boolean' && isExistingUser)
+
   return (
     <>
       <Header />
       <div className="login">
         <h1>{isSignup ? 'Signup' : 'Login'}</h1>
         <TextField
+          onFocus={() => {
+            setIsUserFocused(true)
+            setIsExistingUser(null)
+          }}
           fullWidth
           label="Username"
+          error={helperTextLoginVisibility || helperTextSignupVisibility}
           margin="normal"
           name="username"
+          onBlur={checkExistingUser}
           onChange={handleUserInfo}
           required
           value={user.username}
           variant="outlined"
+          helperText={(
+            <>
+              {helperTextSignupVisibility && '*User already exists. Login or signup with a different username.'}
+              {helperTextLoginVisibility && '*User is not registered. Signup instead.'}
+            </>
+          )}
         />
         <TextField
           fullWidth
