@@ -15,6 +15,13 @@ const theme = createMuiTheme({
     secondary: {
       main: '#e84a5f'
     }
+  },
+  typography: {
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeightBold: '900',
+    fontWeightLight: '100',
+    fontWeightMedium: '500',
+    fontWeightRegular: '300'
   }
 })
 

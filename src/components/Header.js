@@ -17,7 +17,7 @@ const Header = ({ logout }) => {
       <h1>Keeper</h1>
       {!!logout && (
         <button
-          className="logout-button"
+          className="logout-button button-common"
           onClick={handlePopup}
           type="button"
         >

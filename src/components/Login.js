@@ -56,7 +56,7 @@ function LoginPage({ apiCall, setLogin }) {
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
-              <button className="password-eye" type="button" onClick={() => setShowPassword(!showPassword)}>
+              <button className="password-eye button-common" type="button" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
               </button>
             )
@@ -73,7 +73,7 @@ function LoginPage({ apiCall, setLogin }) {
           {isSignup ? 'SIGNUP' : 'LOGIN'}
         </Button>
         <button
-          className="secondary-button"
+          className="secondary-button button-common"
           type="button"
           onClick={() => setIsSignup(!isSignup)}
         >

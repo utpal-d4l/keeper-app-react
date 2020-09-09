@@ -154,6 +154,8 @@
     background: transparent;
     text-decoration: underline;
     margin: 2rem auto;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
   }
   
   .logout-button {
@@ -171,4 +173,13 @@
     right: 2rem;
     max-width: 30%;
   }
-  
+
+  .button-common {
+    outline: 0;
+    cursor: pointer;
+  }
+
+  .fab-button:disabled {
+    opacity: 1;
+    background-color: #ccc;
+  }
